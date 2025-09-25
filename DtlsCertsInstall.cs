@@ -90,7 +90,7 @@ public static class SetValidServerCertificates_Patch
 {
     // In 17.0.0 AuthManager.CreateDtlsConnection is inlined.
     // We have to patch the method that directly sets the cert to make dtls stuffs work.
-    public static bool Prefix(ref X509Certificate2Collection certificateCollection)
+    public static bool Prefix([HarmonyArgument(0)] ref X509Certificate2Collection certificateCollection)
     {
         // Clear official certificates if configured to do so
         if (DtlsCertsInstallPlugin.ClearOfficialCert?.Value == true)
